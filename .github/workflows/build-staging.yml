@@ -45,7 +45,7 @@ jobs:
       - name: Run Helm Deploy
         run: |
           kubectl -n staging get events --sort-by='{.lastTimestamp}';
-          helm uninstall contoso-website;
+          helm uninstall contoso-website --namespace staging;
           helm upgrade \
             --install \
             --create-namespace \

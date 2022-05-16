@@ -5,21 +5,21 @@ on:
     branches: [ main ]
 
 jobs:
-  build_push_image:
-    runs-on: ubuntu-20.04
+#  build_push_image:
+#    runs-on: ubuntu-20.04
 
-    steps:
-      - uses: actions/checkout@v2
+ #   steps:
+ #     - uses: actions/checkout@v2
 
-      - name: Build and push staging image
-        uses: docker/build-push-action@v1.1.1
-        with:
-          username: ${{ secrets.ACR_LOGIN }}
-          password: ${{ secrets.ACR_PASSWORD }}
-          registry: ${{ secrets.ACR_NAME }}
-          repository: contoso-website
-          tags: latest
-
+#      - name: Build and push staging image
+#        uses: docker/build-push-action@v1.1.1
+#        with:
+#          username: ${{ secrets.ACR_LOGIN }}
+#          password: ${{ secrets.ACR_PASSWORD }}
+#          registry: ${{ secrets.ACR_NAME }}
+#          repository: contoso-website
+#          tags: latest
+#
   deploy:
     runs-on: ubuntu-20.04
     needs: build_push_image
@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Helm Deploy
         run: |
-          kubectl -n <namespace> get events --sort-by='{.lastTimestamp}';
+          kubectl -n staging get events --sort-by='{.lastTimestamp}';
           helm uninstall contoso-website;
           helm upgrade \
             --install \

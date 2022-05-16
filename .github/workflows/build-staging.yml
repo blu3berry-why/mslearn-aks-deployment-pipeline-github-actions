@@ -27,3 +27,38 @@ jobs:
           context: .
           tags: ${{secrets.ACR_NAME}}/contoso-website:latest
           push: true
+          
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: build_push_image # Will wait for the execution of the previous job
+    
+    steps:
+     - uses: actions/checkout@v2
+     
+     - name: Helm tool installer
+       uses: Azure/setup-helm@v2.0
+       with:
+        # Version of helm
+         version: v3.3.1
+         
+     - name: Kubernetes Set Context
+       uses: Azure/k8s-set-context@v2
+       with:
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
+         resource-group: mslearn-gh-pipelines-7271
+        # Azure connected cluster name
+         cluster-name: contoso-video
+         
+         
+     - name: Run Helm Deploy
+       run: | 
+        helm upgrade \
+        --install \
+        --create-namespace \
+        --atomic \
+        --wait \
+        --namespace staging \
+        contoso-website \
+        ./kubernetes/contoso-website \
+        --set image.repository=${{ secrets.ACR_NAME }} \
+        --set dns.name=${{ secrets.DNS_NAME }}

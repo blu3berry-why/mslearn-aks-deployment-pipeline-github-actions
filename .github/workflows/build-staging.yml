@@ -22,7 +22,7 @@ jobs:
 #
   deploy:
     runs-on: ubuntu-20.04
-    needs: build_push_image
+#    needs: build_push_image
 
     steps:
       - uses: actions/checkout@v2
@@ -55,7 +55,8 @@ jobs:
             contoso-website \
             ./kubernetes/contoso-website \
             --set image.repository=${{ secrets.ACR_NAME }} \
-            --set dns.name=${{ secrets.DNS_NAME }} \
+            --set dns.name=${{ secrets.DNS_NAME }} ;
+            kubectl -n staging get events --sort-by='{.lastTimestamp}'
 
 
 

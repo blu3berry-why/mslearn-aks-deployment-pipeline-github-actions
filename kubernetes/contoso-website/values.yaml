@@ -4,4 +4,4 @@ image:
   tag: latest
 
 dns:
-  name: a20851f54ed540db9429.eastus.aksapp.io
+  name: "a20851f54ed540db9429.eastus.aksapp.io"

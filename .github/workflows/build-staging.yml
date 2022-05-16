@@ -44,8 +44,6 @@ jobs:
         with:
 # Path to the Dockerfile
           context: . # optional
-
-          repository: contoso-website
      
           push: true # optional, default is false
           # List of secrets to expose to the build (e.g., key=string, GIT_AUTH_TOKEN=mytoken)

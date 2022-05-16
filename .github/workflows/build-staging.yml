@@ -44,6 +44,7 @@ jobs:
 
       - name: Run Helm Deploy
         run: |
+          ls ;
           helm upgrade \
             --install \
             --create-namespace \

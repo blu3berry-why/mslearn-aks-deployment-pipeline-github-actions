@@ -44,7 +44,7 @@ jobs:
      - name: Kubernetes Set Context
        uses: Azure/k8s-set-context@v2
        with:
-         creds: ${{ secrets.AZURE_CREDENTIALS }}
+         kubeconfig: ${{ secrets.AZURE_CREDENTIALS }}
          resource-group: mslearn-gh-pipelines-7271
         # Azure connected cluster name
          cluster-name: contoso-video

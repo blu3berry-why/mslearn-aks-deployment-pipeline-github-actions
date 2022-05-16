@@ -39,9 +39,13 @@ jobs:
           # AKS Cluster Name
           cluster-name: contoso-video
 
+      - name: Kubectl tool installer
+        uses: Azure/setup-kubectl@v2.1
 
       - name: Run Helm Deploy
         run: |
+          kubectl -n <namespace> get events --sort-by='{.lastTimestamp}';
+          helm uninstall contoso-website;
           helm upgrade \
             --install \
             --create-namespace \

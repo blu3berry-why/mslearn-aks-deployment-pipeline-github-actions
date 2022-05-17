@@ -7,6 +7,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
+  defaultBackend: contoso-website
   rules:
     - host: contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
       http:

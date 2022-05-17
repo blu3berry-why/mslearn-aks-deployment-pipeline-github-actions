@@ -44,8 +44,6 @@ jobs:
 
       - name: Run Helm Deploy
         run: |
-          kubectl -n staging get events --sort-by='{.lastTimestamp}';
-          helm uninstall contoso-website --namespace staging;
           helm upgrade \
             --install \
             --create-namespace \
@@ -55,8 +53,7 @@ jobs:
             contoso-website \
             ./kubernetes/contoso-website \
             --set image.repository=${{ secrets.ACR_NAME }} \
-            --set dns.name=${{ secrets.DNS_NAME }} ;
-            kubectl -n staging get events --sort-by='{.lastTimestamp}'
+            --set dns.name=${{ secrets.DNS_NAME }} 
 
 
 
